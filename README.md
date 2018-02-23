@@ -2,6 +2,15 @@
 
 This repo contains several example configurations for setting up Taiga using [docker-taiga](https://github.com/benhutchins/docker-taiga).
 
+## What's taiga.io?
+
+**Taiga** (project management)
+From [Wikipedia](https://en.wikipedia.org/wiki/Taiga_(project_management))
+
+Taiga is a free and open-source project management system for startups, Agile developers, and designers. Its frontend is written in AngularJS and CoffeeScript; backend, in Django and Python. Taiga is released under GNU Affero General Public License.
+
+https://taiga.io/
+
 ## Simple Example
 
 If you want a very simple example, simply pull the `docker-compose.yml` file from here:
