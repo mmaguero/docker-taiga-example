@@ -4,24 +4,25 @@ services:
   taiga:
     build: .
     ports:
-      - 80:80
-      # - 443:443 # To enable SSL, uncomment this line. See "Enable SSL" below.
+      - 80:80 
+      - 25:25 
+      #- 443:443 # To enable SSL, uncomment this line. See "Enable SSL" below.
     depends_on:
       - postgres
 
       # To enable taiga-events, uncomment the following lines:
-      # - events
-      # - rabbit
-      # - redis
+      #- events
+      #- rabbit
+      #- redis
     environment:
       # Hostname for your instance of Taiga. Required.
-      TAIGA_HOSTNAME: localhost
+      TAIGA_HOSTNAME: your_hostname
 
       # Database variables. Required.
       TAIGA_DB_HOST: postgres
       TAIGA_DB_NAME: taigadb
-      TAIGA_DB_USER: taiga
-      TAIGA_DB_PASSWORD: password
+      TAIGA_DB_USER: your_user_name
+      TAIGA_DB_PASSWORD: your_password
 
       # Enable SSL internally, within the Docker container. Optional.
       # This is not great. I suggest using something on top of this
@@ -30,7 +31,18 @@ services:
       # TAIGA_SSL: 'True'
 
       # Enable SSL externally, preferred method
-      # TAIGA_SSL_BY_REVERSE_PROXY: 'True'
+      TAIGA_SSL_BY_REVERSE_PROXY: 'True'
+
+      TAIGA_ENABLE_EMAIL: 'True'
+      TAIGA_EMAIL_FROM: 'your_mail_sender'
+      TAIGA_EMAIL_USE_TLS: 'False' #(only if you want to use tls)
+      TAIGA_EMAIL_HOST: 'your_host_ip_or_name'
+      TAIGA_EMAIL_PORT: '25' #587 If TLS is TRUE
+      TAIGA_EMAIL_USER: '' #if gmail, hotmail, etc.
+      TAIGA_EMAIL_PASS: '' #if gmail, hotmail, etc.
+
+      TAIGA_SECRET_KEY: 'your_secret_key'
+
     volumes:
       # Media and uploads directory. Required (or you will lose all uploads)
       - ./media:/usr/src/taiga-back/media
@@ -42,8 +54,8 @@ services:
     image: postgres
     environment:
       POSTGRES_DB: taigadb
-      POSTGRES_USER: taiga
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: your_user_name
+      POSTGRES_PASSWORD: you_password
     ports:
       - 5432
     volumes:
@@ -52,19 +64,19 @@ services:
 
 
   # To enable taiga-events, uncomment the following lines:
-  # rabbit:
-  #   image: rabbitmq:3
-  #   hostname: rabbit
-  # 
-  # redis:
-  #   image: redis:3
-  # 
-  # celery:
-  #   image: celery
-  #   links:
-  #     - rabbit
-  # 
-  # events:
-  #   image: benhutchins/taiga-events
-  #   links:
-  #     - rabbit
+  #rabbit:
+   # image: rabbitmq:3
+   # hostname: rabbit
+   
+  #redis:
+   # image: redis:3
+   
+  #celery:
+   # image: celery
+    #links:
+     # - rabbit
+  
+ # events:
+  #  image: benhutchins/taiga-events
+   # links:
+    #  - rabbit
