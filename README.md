@@ -16,7 +16,7 @@ plugins.
 To use this example, as-is, simply clone this repo and startup Docker:
 
 ```bash
-git clone https://github.com/benhutchins/docker-taiga-example.git mytaiga
+git clone https://github.com/mmaguero/docker-taiga-example.git mytaiga
 cd mytaiga/
 
 # Optional, but likely desired, update your configuration now
@@ -30,7 +30,7 @@ docker-compose  up -d
 # Wait ~30 seconds. The taiga container will initialize your postgres database.
 
 # Now open your web browser:
-open http://localhost/
+open http://your_hostname/
 ````
 
 ### How to enable the LDAP plugin
@@ -47,4 +47,9 @@ To enable LDAP as well:
 To enable [taiga-events](https://github.com/taigaio/taiga-events):
 
 1. Uncomment relevant lines from `docker-compose.yml`
-2. Update to `eventsUrl` inside the `taiga-conf/conf.json` file
+2. Update to `eventsUrl` inside the `taiga-conf/conf.json` file (ws://your_hostname/events)
+
+### My customize
+
+1. LDAP auth
+2. Send mail (port: 25)
